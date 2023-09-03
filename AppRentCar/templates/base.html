@@ -20,18 +20,18 @@
         <span class="text-body-secondary">Toggleable via the navbar brand.</span>
     </div>
 </div>
-<nav class="navbar navbar-dark bg-primary">
+<nav class="navbar navbar-dark bg-secondary ">
     <div class="container justify-content-start">
         <img src="{% static 'LogoCR.svg' %}" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+        <button class="btn btn-secondary " type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
             Panel Użytkownika
         </button>
         <a href={% url 'home' %}>
-        <button class="btn btn btn-primary" type="button" data-bs-target="#home">Home</button>
+        <button class="btn btn btn-secondary" type="button" data-bs-target="#home">Home</button>
         </a>
     </div>
 </nav>
-<div class="offcanvas offcanvas-start bg-primary" tabindex="-1" id="sidebar">
+<div class="offcanvas offcanvas-start bg-secondary" tabindex="-1" id="sidebar">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title text-light text-center">Panel Użytkownika</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -62,7 +62,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
-<div class="py-3 fotter fixed-bottom text-light text-center bg-primary"><p
+<div class="py-3 fotter fixed-bottom text-light text-center bg-secondary"><p
         class="text-center text-body-secondary">Created by
     the PythonTeam4 · © 2023</p></div>
 </body>
