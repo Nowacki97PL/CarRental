@@ -94,7 +94,7 @@ class RentCreateView(LoginRequiredMixin, CreateView):
     model = Rent
     form_class = RentForm
     template_name = "create_rent.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy('confirm_reservation', kwargs={'id': 0})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -119,6 +119,8 @@ class RentCreateView(LoginRequiredMixin, CreateView):
         rent.car = car
         rent.amount = rental_price * period
         rent.client = self.request.user
+        rent = form.save()
+        self.success_url = reverse_lazy('confirm_reservation', kwargs={'id': rent.id})
         return super().form_valid(form)
 
 
@@ -202,3 +204,14 @@ class RentAdminView(ListView):
 
     def get_queryset(self):
         return Rent.objects.all()
+    
+
+class RentConfirmationView(TemplateView):
+    template_name = 'confirm_reservation.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        rent_id = self.kwargs.get('id')
+        rent = Rent.objects.get(pk=rent_id)
+        context['rent'] = rent
+        return context

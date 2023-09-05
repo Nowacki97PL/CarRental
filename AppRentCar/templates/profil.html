@@ -14,8 +14,13 @@
     <div class="panel-body inf-content">
         <div class="row">
             <div class="col-md-4">
-                <img alt="" style="width:370px; height: 370px;" title="" class="img-circle img-thumbnail isTooltip"
+                {% if user_profile.avatar %}
+                <img alt="" style="width:370px; height: 370px;" title=""
+                     class="img-circle img-thumbnail isTooltip"
                      src="{% url 'images' user_profile.avatar %}" data-original-title="Usuario">
+            {% else %}
+                <div style="width:370px; height: 370px; border: 1px solid #ccc;"></div>
+            {% endif %}
                 <ul title="Ratings" class="list-inline ratings text-center">
                     <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
@@ -27,7 +32,7 @@
             <div class="col-md-6">
                 <strong>Dane o użytkowniku:</strong><br>
                 <div class="table-responsive">
-                    <table class="table table-user-information">
+                    <table class="table table-user-information border border-3 shadow">
                         <tbody>
                         <tr>
                             <td>
@@ -137,7 +142,8 @@
             }
         </style>
 
-        <button class="btn btn-primary"><a href="{% url 'edit_profile' %}">Edytuj profil</a></button>
+        <button class="btn btn-secondary shadow"><a href="{% url 'edit_profile' %}">Edytuj profil</a></button>
+        <button class="btn btn-secondary shadow"><a href="{% url 'password_change' %}">Zmiana hasła</a></button>
     </div>
 </div>
 {% endblock %}
