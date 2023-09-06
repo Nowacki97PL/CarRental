@@ -79,9 +79,13 @@ WSGI_APPLICATION = "RentCar.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rentcarpt4',
+        'USER': 'postgres',
+        'PASSWORD': '3010Audi',
+        'HOST': 'localhost',  # Możesz także użyć adresu IP lub nazwy hosta
+        'PORT': '5432',  # Domyślny port PostgreSQL to 5432
     }
 }
 

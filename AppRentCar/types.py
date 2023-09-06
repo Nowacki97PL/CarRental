@@ -20,6 +20,7 @@ type_car = {
     ("Kombi", "Kombi"),
     ("Sedan", "Sedan"),
     ("Coupe", "Coupe"),
+    ("Cabrio", "Cabrio"),
     ("Hatchback", "Hatchback"),
     ("Suv", "Suv"),
     ("Van", "Van"),

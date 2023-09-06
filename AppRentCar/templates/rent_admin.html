@@ -1,10 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-{% for rent in rents %}
-<li>{{ rent.client }}: {{ rent.rental_terms.car }} - Od {{ rent.start_date }} Do {{ rent.end_date }}</li>
-{% endfor %}
-
+<div class="container mx-auto text-center"><h1>Rezerwacje użytkowników</h1></div>
+<div class="container shadow mt-5">
+    <br>
+    {% if rents %}
+        <table class="table caption-top">
+            <thread>
+                <tr class="table-dark">
+                    <th scope="col">Klient</th>
+                    <th scope="col">Samochód</th>
+                    <th scope="col">Data od:</th>
+                    <th scope="col">Data do:</th>
+                    <th scope="col">Cena:</th>
+                </tr>
+            </thread>
+            <tbody>
+                {% for rent in rents %}
+                <tr>
+                    <td>{{ rent.client }}</td>
+                    <td>{{ rent.rental_terms.car }}</td>
+                    <td>{{ rent.start_date.date }}</td>
+                    <td>{{ rent.end_date.date }}</td>
+                    <td>{{ rent.amount }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Brak dostępnych rezerwacji.</p>
+    {% endif %}
+</div>
 {% endblock %}
-

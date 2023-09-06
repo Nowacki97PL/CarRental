@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Register</h1>
+
+<div class="container mx-auto border-secondary border-2 shadow mt-5">
+    <h1>Rejestracja</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Rejestruj</button>
+        <button type="submit" class="btn btn-primary btn-secondary mb-3 shadow">Rejestruj</button>
+    </form>
+</div>    
 
 {% endblock %}

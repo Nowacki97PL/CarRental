@@ -34,7 +34,7 @@ class Car(BaseModel):
     model = models.CharField(max_length=32)
     cars_type = models.CharField(max_length=32, choices=type_car)
     engine = models.CharField(max_length=32, choices=type_engines)
-    capacity = models.FloatField()
+    capacity = models.FloatField(null=True)
     year = models.CharField(max_length=8)
     number_of_seats = models.IntegerField()
     consumption = models.CharField(max_length=32)

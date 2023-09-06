@@ -14,16 +14,15 @@ from django.views.generic import (
     TemplateView,
 )
 from django_filters.views import FilterView
-
-from .forms import CarForm, RentForm, UserProfileForm, DeleteCarForm, EditCarForm
-from .models import Car, Rent, RentalTerms, UserProfile
+from .forms import CarForm, CompanyBranchesForm, RentForm, RentalTermsForm, UserProfileForm, DeleteCarForm, EditCarForm
+from .models import Car, CompanyBranches, Rent, RentalTerms, UserProfile
 from datetime import date, timedelta
 from .filters import CarFilter
 
 
 class HomeView(FilterView):
     model = Car
-    context_object_name = "cars_list"
+    context_object_name = "object_list"
     template_name = "home.html"
     filterset_class = CarFilter
 
@@ -36,6 +35,7 @@ class HomeView(FilterView):
             data["end_date"] = (date.today() + timedelta(days=7)).strftime("%Y-%m-%d")
         filterset_kwargs["data"] = data
         return filterset_kwargs
+    
 
 
 class CarDetailView(DetailView):
@@ -44,9 +44,9 @@ class CarDetailView(DetailView):
 
 
 class CarCreateView(FormView):
-    template_name = "form.html"
+    template_name = "cars_create.html"
     form_class = CarForm
-    success_url = reverse_lazy("cars")
+    success_url = reverse_lazy("admin_panel")
 
     def form_valid(self, form):
         form.save()
@@ -61,7 +61,7 @@ class CarCreateView(FormView):
 
 
 class CarUpdateView(UpdateView):
-    template_name = "form.html"
+    template_name = "edit_car.html"
     model = Car
     fields = "__all__"
 
@@ -94,7 +94,7 @@ class RentCreateView(LoginRequiredMixin, CreateView):
     model = Rent
     form_class = RentForm
     template_name = "create_rent.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy('confirm_reservation', kwargs={'id': 0})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -119,6 +119,8 @@ class RentCreateView(LoginRequiredMixin, CreateView):
         rent.car = car
         rent.amount = rental_price * period
         rent.client = self.request.user
+        rent = form.save()
+        self.success_url = reverse_lazy('confirm_reservation', kwargs={'id': rent.id})
         return super().form_valid(form)
 
 
@@ -202,3 +204,27 @@ class RentAdminView(ListView):
 
     def get_queryset(self):
         return Rent.objects.all()
+    
+
+class RentConfirmationView(TemplateView):
+    template_name = 'confirm_reservation.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        rent_id = self.kwargs.get('id')
+        rent = Rent.objects.get(pk=rent_id)
+        context['rent'] = rent
+        return context
+    
+class RentalTermsCreateView(CreateView):
+    model = RentalTerms
+    form_class = RentalTermsForm
+    template_name = 'create_rental_terms.html'
+    success_url = reverse_lazy('admin_panel')
+    
+class CompanyBranchesCreateView(CreateView):
+    model = CompanyBranches
+    form_class = CompanyBranchesForm
+    template_name = 'create_branch.html'
+    success_url = reverse_lazy('admin_panel')
+
