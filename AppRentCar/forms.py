@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Car, Rent, UserProfile
+from .models import Car, CompanyBranches, Rent, RentalTerms, UserProfile
 
 
 class CarForm(forms.ModelForm):
@@ -27,6 +27,25 @@ class CarForm(forms.ModelForm):
             "no_gears": forms.Select(attrs={"class": "form-control is_valid"}),
             "drive": forms.Select(attrs={"class": "form-control is_valid"}),
         }
+        
+        labels = {
+            "avatar": "Zdjęcie",
+            "brand": "Marka",
+            "model": "Model",
+            "cars_type": "Typ nadwozia",
+            "engine": "Silnik",
+            "capacity": "Pojemność",
+            "year": "Rok produkcji",
+            "number_of_seats": "Ilość miejsc",
+            "consumption": "Spalanie",
+            "power": "Moc silnika",
+            "car_mileage": "Przebieg",
+            "transmission": "Skrzynia biegów",
+            "no_gears": "Ilość biegów",
+            "drive": "Typ napędu",
+        }
+        
+
 
 
 class RentForm(forms.ModelForm):
@@ -44,19 +63,6 @@ class RentForm(forms.ModelForm):
             "take_from": forms.Select(attrs={"class": "form-select"}),
             "take_back": forms.Select(attrs={"class": "form-select"}),
         }
-
-
-class AvailabilityForm(forms.Form):
-    start_date = forms.DateField()
-    end_date = forms.DateField()
-    widgets = {
-        "start_date": forms.DateInput(
-            attrs={"class": "form-control is_valid", "style": "max-width: 150px;"}
-        ),
-        "start_end": forms.DateInput(
-            attrs={"class": "form-control is_valid", "style": "max-width: 150px;"}
-        ),
-    }
 
 
 class UserProfileForm(forms.ModelForm):
@@ -93,3 +99,14 @@ class EditCarForm(forms.Form):
         label="Wybierz pojazd do edycji",
         widget=forms.Select(attrs={"class": "form-control is_valid"}),
     )
+    
+class RentalTermsForm(forms.ModelForm):
+    class Meta:
+        model = RentalTerms
+        fields = ['car', 'price']
+
+
+class CompanyBranchesForm(forms.ModelForm):
+    class Meta:
+        model = CompanyBranches
+        fields = ['city']

@@ -2,12 +2,14 @@
 
 {% block content %}
 
-<div class="container mx-auto text-center">
+<div class="container mx-auto text-center mt-3">
 <h1>Panel administracyjny</h1>
 </div>
-<div class="container mx-auto">
+<div class="container mx-auto mt-5">
 <ul class="list-group">
     <li class="list-group-item border shadow-lg"><a href="{% url 'cars_create' %}">Dodaj pojazd</a></li>
+    <li class="list-group-item border shadow-lg"><a href="{% url 'create_rental_terms' %}">Dodaj warunki najmu</a></li>
+    <li class="list-group-item border shadow-lg"><a href="{% url 'create_branch' %}">Dodaj filię firmy</a></li>
     <li class="list-group-item border shadow-lg"><a href="{% url 'delete_car_from_list' %}">Usuń pojazd</a></li>
     <li class="list-group-item border shadow-lg"><a href="{% url 'edit_car_from_list' %}">Edytuj pojazd</a></li>
     <li class="list-group-item border shadow-lg"><a href="{% url 'rent_admin' %}">Historia rezerwacji</a></li>
