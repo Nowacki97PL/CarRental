@@ -1,5 +1,6 @@
 from django import forms
 
+
 from .models import Car, CompanyBranches, Rent, RentalTerms, UserProfile
 
 
@@ -53,15 +54,15 @@ class RentForm(forms.ModelForm):
         model = Rent
         fields = ["rental_terms", "start_date", "end_date", "take_from", "take_back"]
         widgets = {
-            "rental_terms": forms.Select(attrs={"class": "form-select"}),
+            "rental_terms": forms.Select(attrs={"class": "form-select is_valid"}),
             "start_date": forms.DateInput(
-                attrs={"class": "form-control", "type": "date"}
+                attrs={"class": "form-control is_valid", "type": "date"}
             ),
             "end_date": forms.DateInput(
-                attrs={"class": "form-control", "type": "date"}
+                attrs={"class": "form-control is_valid", "type": "date"}
             ),
-            "take_from": forms.Select(attrs={"class": "form-select"}),
-            "take_back": forms.Select(attrs={"class": "form-select"}),
+            "take_from": forms.Select(attrs={"class": "form-select is_valid"}),
+            "take_back": forms.Select(attrs={"class": "form-select is_valid"}),
         }
 
 
@@ -103,10 +104,15 @@ class EditCarForm(forms.Form):
 class RentalTermsForm(forms.ModelForm):
     class Meta:
         model = RentalTerms
-        fields = ['car', 'price']
+        fields = ["car", "price"]
 
 
 class CompanyBranchesForm(forms.ModelForm):
     class Meta:
         model = CompanyBranches
-        fields = ['city']
+        fields = ["city"]
+        widget={"city":forms.TextInput(attrs={"class": 'form-control is valid'})},
+        
+        labels = {
+            "city": "Miasto",
+        }

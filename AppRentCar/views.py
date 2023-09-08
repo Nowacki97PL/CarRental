@@ -115,13 +115,21 @@ class RentCreateView(LoginRequiredMixin, CreateView):
         end_date = form.cleaned_data["end_date"]
         period = (end_date - start_date).days
         rental_price = rental_terms.price
+        
+        if start_date > end_date:
+            form.add_error("start_date", "Data rozpoczęcia nie może być późniejsza niż data zakończenia.")
+            return self.form_invalid(form)
+
         rent = form.save(commit=False)
         rent.car = car
         rent.amount = rental_price * period
         rent.client = self.request.user
-        rent = form.save()
+        rent.save()
         self.success_url = reverse_lazy('confirm_reservation', kwargs={'id': rent.id})
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class SubmittableLoginView(LoginView):

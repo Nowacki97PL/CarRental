@@ -84,8 +84,8 @@ DATABASES = {
         'NAME': 'rentcarpt4',
         'USER': 'postgres',
         'PASSWORD': '3010Audi',
-        'HOST': 'localhost',  # Możesz także użyć adresu IP lub nazwy hosta
-        'PORT': '5432',  # Domyślny port PostgreSQL to 5432
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -114,11 +114,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "pl-pl"
 
-TIME_ZONE = "Europe/Warsaw"
+TIME_ZONE = 'UTC'
 
-USE_I18N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)

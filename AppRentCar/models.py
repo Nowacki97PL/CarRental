@@ -21,7 +21,6 @@ class BaseModel(models.Model):
 
 
 class Car(BaseModel):
-    """Car Model"""
 
     avatar = models.ImageField(upload_to="media/avatars/", blank=True, null=True)
     avatar_thumbnail = ImageSpecField(
@@ -49,7 +48,6 @@ class Car(BaseModel):
 
 
 class UserProfile(BaseModel):
-    """User Profile class"""
 
     avatar = models.ImageField(upload_to="media/avatars/", blank=True, null=True)
     avatar_thumbnail = ImageSpecField(
@@ -75,7 +73,6 @@ class UserProfile(BaseModel):
 
 
 class CompanyBranches(BaseModel):
-    """Comapny Branches"""
 
     city = models.CharField(max_length=32, unique=True)
 
@@ -84,7 +81,6 @@ class CompanyBranches(BaseModel):
 
 
 class RentalTerms(BaseModel):
-    """Rental Terms class"""
 
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=16, decimal_places=2, null=True)
@@ -94,7 +90,6 @@ class RentalTerms(BaseModel):
 
 
 class Rent(BaseModel):
-    """Rent class"""
 
     rental_terms = models.ForeignKey(RentalTerms, on_delete=models.CASCADE)
     client = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -107,10 +102,13 @@ class Rent(BaseModel):
         CompanyBranches, related_name="rents_returned", on_delete=models.CASCADE
     )
     amount = models.DecimalField(max_digits=6, decimal_places=2, default=0)
-
+    
     def clean(self):
         if not self.is_car_available():
-            raise (ValidationError("This car is not available for the selected date"))
+            raise (ValidationError("Samochód nie jest dostępny w tej dacie."))
+        if self.start_date and self.end_date and self.start_date >= self.end_date:
+            raise ValidationError("Data rozpoczęcia nie może być późniejsza lub równa dacie zakończenia.")
+
 
     def is_car_available(self):
         if self.id is None:
@@ -135,7 +133,6 @@ class Rent(BaseModel):
     @property
     def period(self):
         if self.start_date and self.end_date:
-            delta = self.end_date - self.start_date
-            return delta.days
+            return (self.end_date - self.start_date).days
         else:
-            return 0
+            return None
