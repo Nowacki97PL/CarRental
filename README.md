@@ -17,8 +17,13 @@ git clone https://github.com/Nowacki97PL/CarRental.git
 python -m venv venv
 ```
 3. Run virtual environment
+Windows:
 ```
-venv/Scripts/activate(windows) or source venv/bin/activate(linux)
+venv/Scripts/activate 
+```
+Linux:
+```
+source venv/bin/activate
 ```
 4. Install the required dependencies:
 ```
