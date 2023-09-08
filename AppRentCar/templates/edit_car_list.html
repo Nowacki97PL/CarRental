@@ -1,9 +1,12 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 {% block content %}
-<h2>Edytuj</h2>
-<form method="post">
+  <div class="container mx-auto border-secondary border-2 shadow mt-5">
+  <h2>Edytuj</h2>
+  <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Edytuj</button>
-</form>
+    <button type="submit" class="btn btn-primary btn-secondary mb-3 shadow">Edytuj</button>
+  </form>
+</div>
 {% endblock %}

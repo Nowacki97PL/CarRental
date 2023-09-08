@@ -89,6 +89,7 @@ class DeleteCarForm(forms.Form):
         queryset=Car.objects.all(),
         label="Wybierz pojazd do usunięcia",
         widget=forms.Select(attrs={"class": "form-control is_valid"}),
+        to_field_name="id"
     )
 
 

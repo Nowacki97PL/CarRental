@@ -198,12 +198,11 @@ class DeleteCarFromList(FormView):
     template_name = "delete_car_list.html"
     form_class = DeleteCarForm
 
-    def form_valid(self, form):
-        car_id = form.cleaned_data["car_id"]
+    def post(self, request, *args, **kwargs):
+        car_id = request.POST.get("car_id")
         car = get_object_or_404(Car, id=car_id)
         car.delete()
         return redirect("admin_panel")
-
 
 class EditCarFromList(FormView):
     template_name = "edit_car_list.html"
