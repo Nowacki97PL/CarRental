@@ -4,17 +4,11 @@ type_engines = {
     ("Hybryda", "Hybryda"),
     ("Elektryczny", "Elektryczny"),
 }
-type_transmission = \
-    {("Automatyczna", "Automatyczna"),
-     ("Manuala", "Manualna")}
+type_transmission = {("Automatyczna", "Automatyczna"), ("Manuala", "Manualna")}
 
-number_of_gears = \
-    {("5", "5"), ("6", "6"),
-     ("7", "7"), ("8", "8")}
+number_of_gears = {("5", "5"), ("6", "6"), ("7", "7"), ("8", "8")}
 
-type_drives = \
-    {("Przedni", "Przedni"),
-     ("Tylni", "Tylni"), ("4x4", "4x4")}
+type_drives = {("Przedni", "Przedni"), ("Tylni", "Tylni"), ("4x4", "4x4")}
 
 type_car = {
     ("Kombi", "Kombi"),

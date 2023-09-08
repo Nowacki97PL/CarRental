@@ -4,40 +4,63 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('AppRentCar', '0012_rename_premium_price_rentalterms_price_and_more'),
+        ("AppRentCar", "0012_rename_premium_price_rentalterms_price_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='userprofile',
-            name='first_name',
+            model_name="userprofile",
+            name="first_name",
             field=models.CharField(max_length=30, null=True),
         ),
         migrations.AddField(
-            model_name='userprofile',
-            name='last_name',
+            model_name="userprofile",
+            name="last_name",
             field=models.CharField(max_length=30, null=True),
         ),
         migrations.AlterField(
-            model_name='car',
-            name='cars_type',
-            field=models.CharField(choices=[('Suv', 'Suv'), ('Hatchback', 'Hatchback'), ('Coupe', 'Coupe'), ('Sedan', 'Sedan'), ('Van', 'Van'), ('Shooting brake', 'Shooting brake'), ('Kombi', 'Kombi')], max_length=32),
+            model_name="car",
+            name="cars_type",
+            field=models.CharField(
+                choices=[
+                    ("Suv", "Suv"),
+                    ("Hatchback", "Hatchback"),
+                    ("Coupe", "Coupe"),
+                    ("Sedan", "Sedan"),
+                    ("Van", "Van"),
+                    ("Shooting brake", "Shooting brake"),
+                    ("Kombi", "Kombi"),
+                ],
+                max_length=32,
+            ),
         ),
         migrations.AlterField(
-            model_name='car',
-            name='drive',
-            field=models.CharField(choices=[('Przedni', 'Przedni'), ('Tylni', 'Tylni'), ('4x4', '4x4')], max_length=32),
+            model_name="car",
+            name="drive",
+            field=models.CharField(
+                choices=[("Przedni", "Przedni"), ("Tylni", "Tylni"), ("4x4", "4x4")],
+                max_length=32,
+            ),
         ),
         migrations.AlterField(
-            model_name='car',
-            name='engine',
-            field=models.CharField(choices=[('Diesel', 'Diesel'), ('Hybryda', 'Hybryda'), ('Benzyna', 'Benzyna'), ('Elektryczny', 'Elektryczny')], max_length=32),
+            model_name="car",
+            name="engine",
+            field=models.CharField(
+                choices=[
+                    ("Diesel", "Diesel"),
+                    ("Hybryda", "Hybryda"),
+                    ("Benzyna", "Benzyna"),
+                    ("Elektryczny", "Elektryczny"),
+                ],
+                max_length=32,
+            ),
         ),
         migrations.AlterField(
-            model_name='car',
-            name='no_gears',
-            field=models.CharField(choices=[('8', '8'), ('6', '6'), ('5', '5'), ('7', '7')], max_length=8),
+            model_name="car",
+            name="no_gears",
+            field=models.CharField(
+                choices=[("8", "8"), ("6", "6"), ("5", "5"), ("7", "7")], max_length=8
+            ),
         ),
     ]

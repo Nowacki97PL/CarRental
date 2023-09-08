@@ -28,7 +28,7 @@ class CarForm(forms.ModelForm):
             "no_gears": forms.Select(attrs={"class": "form-control is_valid"}),
             "drive": forms.Select(attrs={"class": "form-control is_valid"}),
         }
-        
+
         labels = {
             "avatar": "Zdjęcie",
             "brand": "Marka",
@@ -45,8 +45,6 @@ class CarForm(forms.ModelForm):
             "no_gears": "Ilość biegów",
             "drive": "Typ napędu",
         }
-        
-
 
 
 class RentForm(forms.ModelForm):
@@ -100,7 +98,8 @@ class EditCarForm(forms.Form):
         label="Wybierz pojazd do edycji",
         widget=forms.Select(attrs={"class": "form-control is_valid"}),
     )
-    
+
+
 class RentalTermsForm(forms.ModelForm):
     class Meta:
         model = RentalTerms
@@ -111,8 +110,8 @@ class CompanyBranchesForm(forms.ModelForm):
     class Meta:
         model = CompanyBranches
         fields = ["city"]
-        widget={"city":forms.TextInput(attrs={"class": 'form-control is valid'})},
-        
+        widget = ({"city": forms.TextInput(attrs={"class": "form-control is valid"})},)
+
         labels = {
             "city": "Miasto",
         }

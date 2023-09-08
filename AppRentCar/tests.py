@@ -4,10 +4,13 @@ from django.urls import reverse
 from datetime import datetime
 from .models import Car, RentalTerms, CompanyBranches, Rent
 
+
 class RentCreateViewTest(TestCase):
     def setUp(self):
         self.User = get_user_model()
-        self.user = self.User.objects.create_user(username="testuser", password="testpass")
+        self.user = self.User.objects.create_user(
+            username="testuser", password="testpass"
+        )
         self.car = Car.objects.create(
             brand="TestBrand",
             model="TestModel",

@@ -21,7 +21,6 @@ class BaseModel(models.Model):
 
 
 class Car(BaseModel):
-
     avatar = models.ImageField(upload_to="media/avatars/", blank=True, null=True)
     avatar_thumbnail = ImageSpecField(
         source="avatar",
@@ -48,7 +47,6 @@ class Car(BaseModel):
 
 
 class UserProfile(BaseModel):
-
     avatar = models.ImageField(upload_to="media/avatars/", blank=True, null=True)
     avatar_thumbnail = ImageSpecField(
         source="avatar",
@@ -73,7 +71,6 @@ class UserProfile(BaseModel):
 
 
 class CompanyBranches(BaseModel):
-
     city = models.CharField(max_length=32, unique=True)
 
     def __str__(self):
@@ -81,7 +78,6 @@ class CompanyBranches(BaseModel):
 
 
 class RentalTerms(BaseModel):
-
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=16, decimal_places=2, null=True)
 
@@ -90,7 +86,6 @@ class RentalTerms(BaseModel):
 
 
 class Rent(BaseModel):
-
     rental_terms = models.ForeignKey(RentalTerms, on_delete=models.CASCADE)
     client = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateTimeField()
@@ -102,13 +97,14 @@ class Rent(BaseModel):
         CompanyBranches, related_name="rents_returned", on_delete=models.CASCADE
     )
     amount = models.DecimalField(max_digits=6, decimal_places=2, default=0)
-    
+
     def clean(self):
         if not self.is_car_available():
             raise (ValidationError("Samochód nie jest dostępny w tej dacie."))
         if self.start_date and self.end_date and self.start_date >= self.end_date:
-            raise ValidationError("Data rozpoczęcia nie może być późniejsza lub równa dacie zakończenia.")
-
+            raise ValidationError(
+                "Data rozpoczęcia nie może być późniejsza lub równa dacie zakończenia."
+            )
 
     def is_car_available(self):
         if self.id is None:

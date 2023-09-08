@@ -14,7 +14,15 @@ from django.views.generic import (
     TemplateView,
 )
 from django_filters.views import FilterView
-from .forms import CarForm, CompanyBranchesForm, RentForm, RentalTermsForm, UserProfileForm, DeleteCarForm, EditCarForm
+from .forms import (
+    CarForm,
+    CompanyBranchesForm,
+    RentForm,
+    RentalTermsForm,
+    UserProfileForm,
+    DeleteCarForm,
+    EditCarForm,
+)
 from .models import Car, CompanyBranches, Rent, RentalTerms, UserProfile
 from datetime import date, timedelta
 from .filters import CarFilter
@@ -35,7 +43,6 @@ class HomeView(FilterView):
             data["end_date"] = (date.today() + timedelta(days=7)).strftime("%Y-%m-%d")
         filterset_kwargs["data"] = data
         return filterset_kwargs
-    
 
 
 class CarDetailView(DetailView):
@@ -94,7 +101,7 @@ class RentCreateView(LoginRequiredMixin, CreateView):
     model = Rent
     form_class = RentForm
     template_name = "create_rent.html"
-    success_url = reverse_lazy('confirm_reservation', kwargs={'id': 0})
+    success_url = reverse_lazy("confirm_reservation", kwargs={"id": 0})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -115,9 +122,12 @@ class RentCreateView(LoginRequiredMixin, CreateView):
         end_date = form.cleaned_data["end_date"]
         period = (end_date - start_date).days
         rental_price = rental_terms.price
-        
+
         if start_date > end_date:
-            form.add_error("start_date", "Data rozpoczęcia nie może być późniejsza niż data zakończenia.")
+            form.add_error(
+                "start_date",
+                "Data rozpoczęcia nie może być późniejsza niż data zakończenia.",
+            )
             return self.form_invalid(form)
 
         rent = form.save(commit=False)
@@ -125,7 +135,7 @@ class RentCreateView(LoginRequiredMixin, CreateView):
         rent.amount = rental_price * period
         rent.client = self.request.user
         rent.save()
-        self.success_url = reverse_lazy('confirm_reservation', kwargs={'id': rent.id})
+        self.success_url = reverse_lazy("confirm_reservation", kwargs={"id": rent.id})
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -212,27 +222,28 @@ class RentAdminView(ListView):
 
     def get_queryset(self):
         return Rent.objects.all()
-    
+
 
 class RentConfirmationView(TemplateView):
-    template_name = 'confirm_reservation.html'
+    template_name = "confirm_reservation.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        rent_id = self.kwargs.get('id')
+        rent_id = self.kwargs.get("id")
         rent = Rent.objects.get(pk=rent_id)
-        context['rent'] = rent
+        context["rent"] = rent
         return context
-    
+
+
 class RentalTermsCreateView(CreateView):
     model = RentalTerms
     form_class = RentalTermsForm
-    template_name = 'create_rental_terms.html'
-    success_url = reverse_lazy('admin_panel')
-    
+    template_name = "create_rental_terms.html"
+    success_url = reverse_lazy("admin_panel")
+
+
 class CompanyBranchesCreateView(CreateView):
     model = CompanyBranches
     form_class = CompanyBranchesForm
-    template_name = 'create_branch.html'
-    success_url = reverse_lazy('admin_panel')
-
+    template_name = "create_branch.html"
+    success_url = reverse_lazy("admin_panel")
