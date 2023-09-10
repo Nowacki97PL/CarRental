@@ -12,7 +12,7 @@ CarRental allows you to rent cars
 
 ## Installation
 
-To run AdoptMe locally, follow these steps:
+To run CarRental locally, follow these steps:
 
 1. Clone the repository:
 
