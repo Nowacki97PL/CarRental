@@ -56,8 +56,10 @@ class CarCreateView(FormView):
     success_url = reverse_lazy("admin_panel")
 
     def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+        if form.is_valid():
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
@@ -71,6 +73,12 @@ class CarUpdateView(UpdateView):
     template_name = "edit_car.html"
     model = Car
     fields = "__all__"
+    
+    def form_valid(self, form):
+        if form.is_valid():
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def get_success_url(self):
         car_id = self.kwargs["pk"]
@@ -185,6 +193,12 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user.userprofile
+    
+    def form_valid(self, form):
+        if form.is_valid():
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 class AdminOnlyView(UserPassesTestMixin, TemplateView):
@@ -239,6 +253,12 @@ class RentalTermsCreateView(CreateView):
     form_class = RentalTermsForm
     template_name = "create_rental_terms.html"
     success_url = reverse_lazy("admin_panel")
+    
+    def form_valid(self, form):
+        if form.is_valid():
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 class CompanyBranchesCreateView(CreateView):
@@ -246,3 +266,9 @@ class CompanyBranchesCreateView(CreateView):
     form_class = CompanyBranchesForm
     template_name = "create_branch.html"
     success_url = reverse_lazy("admin_panel")
+    
+    def form_valid(self, form):
+        if form.is_valid():
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
