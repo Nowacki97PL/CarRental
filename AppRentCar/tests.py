@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 from datetime import datetime
+
 from .models import Car, RentalTerms, CompanyBranches, Rent
 
 
@@ -75,7 +76,7 @@ class RentCreateViewTest(TestCase):
             reverse("create_rent", kwargs={"car_id": self.car.id}), data
         )
 
-        self.assertRedirects(response, reverse("confirm_reservation", kwargs={"id": 2}))
+        self.assertRedirects(response, reverse("confirm_reservation", kwargs={"id": 1}))
         self.assertTrue(Rent.objects.filter(rental_terms=self.rental_terms).exists())
 
     def test_form_invalid_data(self):
@@ -96,3 +97,67 @@ class RentCreateViewTest(TestCase):
         self.assertFalse(response.context["form"].is_valid())
         self.assertEqual(response.status_code, 200)
         self.assertFalse(Rent.objects.filter(rental_terms=self.rental_terms).exists())
+        
+    def test_rent_same_car_at_the_same_time(self):
+        self.client.login(username="testuser", password="testpass")
+
+        data_1 = {
+            "rental_terms": self.rental_terms.id,
+            "start_date": "2023-09-01",
+            "end_date": "2023-09-10",
+            "take_from": self.company_branch.id,
+            "take_back": self.company_branch.id,
+        }
+
+        response_1 = self.client.post(
+            reverse("create_rent", kwargs={"car_id": self.car.id}), data_1
+        )
+        self.assertRedirects(response_1, reverse("confirm_reservation", kwargs={"id": 1}))
+        self.assertTrue(Rent.objects.filter(rental_terms=self.rental_terms).exists())
+
+        data_2 = {
+            "rental_terms": self.rental_terms.id,
+            "start_date": "2023-09-01",
+            "end_date": "2023-09-10",
+            "take_from": self.company_branch.id,
+            "take_back": self.company_branch.id,
+        }
+
+        response_2 = self.client.post(
+            reverse("create_rent", kwargs={"car_id": self.car.id}), data_2
+        )
+
+        self.assertFalse(response_2.context["form"].is_valid())
+        self.assertEqual(response_2.status_code, 200)
+        self.assertTrue(Rent.objects.filter(rental_terms=self.rental_terms).count(), 1)
+        
+        
+class RentalTermsCreateViewTests(TestCase):
+    def test_create_rental_terms_with_no_data(self):
+        self.client.login(username="testuser", password="testpass")
+        data = {}
+        response = self.client.post(reverse("create_rental_terms"), data)
+        self.assertFalse(response.context["form"].is_valid())
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(RentalTerms.objects.exists())
+
+    def test_create_rental_terms_with_invalid_price(self):
+        self.client.login(username="testuser", password="testpass")
+        data = {
+            "price": "invalid_price",
+        }
+        response = self.client.post(reverse("create_rental_terms"), data)
+        self.assertFalse(response.context["form"].is_valid())
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(RentalTerms.objects.exists())
+
+    def test_create_rental_terms_with_empty_price(self):
+        self.client.login(username="testuser", password="testpass")
+        data = {
+            "price": "",
+        }
+        response = self.client.post(reverse("create_rental_terms"), data)
+        self.assertFalse(response.context["form"].is_valid())
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(RentalTerms.objects.exists())
+        
