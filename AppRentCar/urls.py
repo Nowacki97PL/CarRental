@@ -1,5 +1,5 @@
 from django.urls import path
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 
 from .views import (
     CarDetailView,
@@ -30,33 +30,14 @@ urlpatterns = [
     path("cars/<int:pk>/update/", CarUpdateView.as_view(), name="cars_update"),
     path("cars/<int:pk>/delete/", CarDeleteView.as_view(), name="cars_delete"),
     path("create_rent/<int:car_id>/", RentCreateView.as_view(), name="create_rent"),
-    path(
-        "create_rental_terms/",
-        RentalTermsCreateView.as_view(),
-        name="create_rental_terms",
-    ),
+    path("create_rental_terms/",RentalTermsCreateView.as_view(),name="create_rental_terms",),
     path("create_branch/", CompanyBranchesCreateView.as_view(), name="create_branch"),
-    path(
-        "confirm_reservation/<int:id>/",
-        RentConfirmationView.as_view(),
-        name="confirm_reservation",
-    ),
-    path(
-        "login/",
-        SubmittableLoginView.as_view(template_name="register/login.html"),
-        name="login",
-    ),
-    path(
-        "sign_up/",
-        RegisterView.as_view(template_name="register/registration.html"),
-        name="register",
-    ),
+    path("confirm_reservation/<int:id>/",RentConfirmationView.as_view(),name="confirm_reservation",),
+    path("login/",SubmittableLoginView.as_view(template_name="register/login.html"),name="login",),
+    path("sign_up/",RegisterView.as_view(template_name="register/registration.html"),name="register",),
     path("logout/", Logout.as_view(), name="logout"),
-    path(
-        "password_change/",
-        PasswordChangeView.as_view(template_name="password-change.html"),
-        name="password_change",
-    ),
+    path("password_change/",PasswordChangeView.as_view(template_name="password-change.html"),name="password_change",),
+    path('password_change/done/', PasswordChangeDoneView.as_view(template_name="password-change-done.html"), name='password_change_done'),
     path("my-rentals/", UserRentalsView.as_view(), name="user_rentals"),
     path("profil/", UserProfileView.as_view(), name="user_profile"),
     path("profile/edit/", UserProfileEditView.as_view(), name="edit_profile"),

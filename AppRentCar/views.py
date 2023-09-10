@@ -54,12 +54,11 @@ class CarCreateView(FormView):
     template_name = "cars_create.html"
     form_class = CarForm
     success_url = reverse_lazy("admin_panel")
+    
 
     def form_valid(self, form):
-        if form.is_valid():
-            return super().form_valid(form)
-        else:
-            return self.form_invalid(form)
+        form.save()
+        return super().form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
@@ -73,12 +72,6 @@ class CarUpdateView(UpdateView):
     template_name = "edit_car.html"
     model = Car
     fields = "__all__"
-    
-    def form_valid(self, form):
-        if form.is_valid():
-            return super().form_valid(form)
-        else:
-            return self.form_invalid(form)
 
     def get_success_url(self):
         car_id = self.kwargs["pk"]
