@@ -105,12 +105,17 @@ class RentalTermsForm(forms.ModelForm):
         model = RentalTerms
         fields = ["car", "price"]
 
+        labels={
+            "car": "Samochód",
+            "price": "Cena",
+        }
+
 
 class CompanyBranchesForm(forms.ModelForm):
     class Meta:
         model = CompanyBranches
         fields = ["city"]
-        widget = ({"city": forms.TextInput(attrs={"class": "form-control is valid"})},)
+        widget = ({"city": forms.TextInput(attrs={"class": "form-control is_valid"})},)
 
         labels = {
             "city": "Miasto",
