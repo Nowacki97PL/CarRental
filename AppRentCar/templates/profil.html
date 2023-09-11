@@ -2,148 +2,148 @@
 
 {% block content %}
 
-<div class="container bootstrap snippets bootdey">
-    <style>
-        .container {
-            border: 0px solid #ccc;
-            padding: 20px;
-            margin-top: 20px;
-        }
-    </style>
+    <div class="container bootstrap snippets bootdey">
+        <style>
+            .container {
+                border: 0px solid #ccc;
+                padding: 20px;
+                margin-top: 20px;
+            }
+        </style>
 
-    <div class="panel-body inf-content">
-        <div class="row">
-            <div class="col-md-4">
-                {% if user_profile.avatar %}
-                <img alt="" style="width:370px; height: 370px;" title=""
-                     class="img-circle img-thumbnail isTooltip"
-                     src="{% url 'images' user_profile.avatar %}" data-original-title="Usuario">
-            {% else %}
-                <div style="width:370px; height: 370px; border: 1px solid #ccc;"></div>
-            {% endif %}
-                <ul title="Ratings" class="list-inline ratings text-center">
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <strong>Dane o użytkowniku:</strong><br>
-                <div class="table-responsive">
-                    <table class="table table-user-information border border-3 shadow">
-                        <tbody>
-                        <tr>
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-user  text-primary"></span>
-                                    Imię
-                                </strong>
-                            </td>
-                            <td class="text-secondary">
-                                {% if user_profile.first_name %}
-                                <p>{{ user_profile.first_name }}</p>
-                                {% else %}
-                                <p>Brak danych</p>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-cloud text-secondary"></span>
-                                    Nazwisko
-                                </strong>
-                            </td>
-                            <td class="text-secondary">
-                                {% if user_profile.last_name %}
-                                <p>{{ user_profile.last_name }}</p>
-                                {% else %}
-                                <p>Brak danych</p>
-                                {% endif %}
-                            </td>
-                        </tr>
+        <div class="panel-body inf-content">
+            <div class="row">
+                <div class="col-md-4">
+                    {% if user_profile.avatar %}
+                        <img alt="" style="width:370px; height: 370px;" title=""
+                             class="img-circle img-thumbnail isTooltip"
+                             src="{% url 'images' user_profile.avatar %}" data-original-title="Usuario">
+                    {% else %}
+                        <div style="width:370px; height: 370px; border: 1px solid #ccc;"></div>
+                    {% endif %}
+                    <ul title="Ratings" class="list-inline ratings text-center">
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <strong>Dane o użytkowniku:</strong><br>
+                    <div class="table-responsive">
+                        <table class="table table-user-information border border-3 shadow">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-user  text-primary"></span>
+                                        Imię
+                                    </strong>
+                                </td>
+                                <td class="text-secondary">
+                                    {% if user_profile.first_name %}
+                                        <p>{{ user_profile.first_name }}</p>
+                                    {% else %}
+                                        <p>Brak danych</p>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-cloud text-secondary"></span>
+                                        Nazwisko
+                                    </strong>
+                                </td>
+                                <td class="text-secondary">
+                                    {% if user_profile.last_name %}
+                                        <p>{{ user_profile.last_name }}</p>
+                                    {% else %}
+                                        <p>Brak danych</p>
+                                    {% endif %}
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-bookmark text-primary"></span>
-                                    Nazwa użytkownika
-                                </strong>
-                            </td>
-                            <td class="text-secondary">
-                                {{user.username}}
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                        Nazwa użytkownika
+                                    </strong>
+                                </td>
+                                <td class="text-secondary">
+                                    {{ user.username }}
+                                </td>
+                            </tr>
 
 
-                        <tr>
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-eye-open text-primary"></span>
-                                    Status
-                                </strong>
-                            </td>
-                            <td class="text-secondary">
-                                {% if user.is_staff %}
-                                <p>Administrator</p>
-                                {% else %}
-                                <p>Użytkownik</p>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-envelope text-primary"></span>
-                                    Email
-                                </strong>
-                            </td>
-                            <td class="text-secondary">
-                                {{user.email}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                    Dołączył/a
-                                </strong>
-                            </td>
-                            <td class="text-secondary">
-                                {{user_profile.created_at}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>
-                                    <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                    Modyfikowany
-                                </strong>
-                            </td>
-                            <td class="text-secondary">
-                                {{user_profile.updated_at}}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                                        Status
+                                    </strong>
+                                </td>
+                                <td class="text-secondary">
+                                    {% if user.is_staff %}
+                                        <p>Administrator</p>
+                                    {% else %}
+                                        <p>Użytkownik</p>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                        Email
+                                    </strong>
+                                </td>
+                                <td class="text-secondary">
+                                    {{ user.email }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                        Dołączył/a
+                                    </strong>
+                                </td>
+                                <td class="text-secondary">
+                                    {{ user_profile.created_at }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                        Modyfikowany
+                                    </strong>
+                                </td>
+                                <td class="text-secondary">
+                                    {{ user_profile.updated_at }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <div>
-        <style>
-            .btn a {
-                color: white;
-                text-decoration: none;
-            }
-        </style>
+    <div class="container">
+        <div>
+            <style>
+                .btn a {
+                    color: white;
+                    text-decoration: none;
+                }
+            </style>
 
-        <button class="btn btn-secondary shadow"><a href="{% url 'edit_profile' %}">Edytuj profil</a></button>
-        <button class="btn btn-secondary shadow"><a href="{% url 'password_change' %}">Zmiana hasła</a></button>
+            <button class="btn btn-secondary shadow"><a href="{% url 'edit_profile' %}">Edytuj profil</a></button>
+            <button class="btn btn-secondary shadow"><a href="{% url 'password_change' %}">Zmiana hasła</a></button>
+        </div>
     </div>
-</div>
 {% endblock %}

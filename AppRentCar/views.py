@@ -14,6 +14,7 @@ from django.views.generic import (
     TemplateView,
 )
 from django_filters.views import FilterView
+from datetime import date, timedelta
 from .forms import (
     CarForm,
     CompanyBranchesForm,
@@ -24,7 +25,6 @@ from .forms import (
     EditCarForm,
 )
 from .models import Car, CompanyBranches, Rent, RentalTerms, UserProfile
-from datetime import date, timedelta
 from .filters import CarFilter
 
 
@@ -54,7 +54,6 @@ class CarCreateView(FormView):
     template_name = "cars_create.html"
     form_class = CarForm
     success_url = reverse_lazy("admin_panel")
-    
 
     def form_valid(self, form):
         form.save()
@@ -63,7 +62,8 @@ class CarCreateView(FormView):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
             return HttpResponseForbidden(
-                "Brak dostępu. Tylko personel ma uprawnienia do dodawania samochodów."
+                "Brak dostępu."
+                "Tylko personel ma uprawnienia do dodawania samochodów."
             )
         return super().dispatch(request, *args, **kwargs)
 
@@ -80,7 +80,8 @@ class CarUpdateView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
             return HttpResponseForbidden(
-                "Brak dostępu. Tylko personel ma uprawnienia do edycji samochodów."
+                "Brak dostępu."
+                "Tylko personel ma uprawnienia do edycji samochodów."
             )
         return super().dispatch(request, *args, **kwargs)
 
@@ -93,7 +94,8 @@ class CarDeleteView(DeleteView):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
             return HttpResponseForbidden(
-                "Brak dostępu. Tylko personel ma uprawnienia do usuwania samochodów."
+                "Brak dostępu."
+                "Tylko personel ma uprawnienia do usuwania samochodów."
             )
         return super().dispatch(request, *args, **kwargs)
 
@@ -186,7 +188,7 @@ class UserProfileEditView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user.userprofile
-    
+
     def form_valid(self, form):
         if form.is_valid():
             return super().form_valid(form)
@@ -210,6 +212,15 @@ class DeleteCarFromList(FormView):
         car = get_object_or_404(Car, id=car_id)
         car.delete()
         return redirect("admin_panel")
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return HttpResponseForbidden(
+                "Brak dostępu."
+                "Tylko personel ma uprawnienia do usuwania samochodów."
+            )
+        return super().dispatch(request, *args, **kwargs)
+
 
 class EditCarFromList(FormView):
     template_name = "edit_car_list.html"
@@ -246,7 +257,7 @@ class RentalTermsCreateView(CreateView):
     form_class = RentalTermsForm
     template_name = "create_rental_terms.html"
     success_url = reverse_lazy("admin_panel")
-    
+
     def form_valid(self, form):
         if form.is_valid():
             return super().form_valid(form)
@@ -259,7 +270,7 @@ class CompanyBranchesCreateView(CreateView):
     form_class = CompanyBranchesForm
     template_name = "create_branch.html"
     success_url = reverse_lazy("admin_panel")
-    
+
     def form_valid(self, form):
         if form.is_valid():
             return super().form_valid(form)
