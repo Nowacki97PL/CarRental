@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>{{ form }}</table>
-    <input type="submit" value="Zapisz" class="btn">
-  </form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>{{ form }}</table>
+        <input type="submit" value="Zapisz" class="btn">
+    </form>
 {% endblock %}

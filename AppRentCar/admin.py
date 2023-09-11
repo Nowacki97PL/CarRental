@@ -5,8 +5,6 @@ from .models import Car, CompanyBranches, RentalTerms, Rent, UserProfile
 
 
 class CarAdmin(ModelAdmin):
-    """personalization of the admin panel"""
-
     ordering = ["id"]
     list_display = [
         "id",
@@ -28,22 +26,16 @@ class CarAdmin(ModelAdmin):
 
 
 class RentalTermsAdmin(ModelAdmin):
-    """personalization of the admin panel"""
-
     ordering = ["id"]
     list_display = ["id", "car", "price"]
 
 
 class UserProfileAdmin(ModelAdmin):
-    """personalization of the admin panel"""
-
     ordering = ["id"]
     list_display = ["id", "username", "first_name", "last_name", "email"]
 
 
 class RentAdmin(ModelAdmin):
-    """personalization of the admin panel"""
-
     ordering = ["id"]
     list_display = [
         "id",

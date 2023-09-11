@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container mx-auto border-secondary border-2 shadow mt-5">
-  <h2>Usuń pojazd</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary btn-secondary mb-3 shadow">Usuń</button>
-  </form>
-</div>
+    <div class="container mx-auto border-secondary border-2 shadow mt-5">
+        <h2>Usuń pojazd</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-secondary mb-3 shadow">Usuń</button>
+        </form>
+    </div>
 {% endblock %}
