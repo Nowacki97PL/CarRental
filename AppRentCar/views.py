@@ -56,8 +56,11 @@ class CarCreateView(FormView):
     success_url = reverse_lazy("admin_panel")
 
     def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+        if form.is_valid():
+            form.save()
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
