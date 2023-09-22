@@ -114,11 +114,11 @@ python manage.py test
 ![Main site](Screenshots/main2.png)
 ![Sidebar Admin](Screenshots/Sidebar.png)
 ![Sidebar User](Screenshots/SideBarUser.png)
-![Admin Panel](Screenshots/Admin Panel.png)
+![Admin Panel](Screenshots/Admin_Panel.png)
 ![User profile](Screenshots/user_profile.png)
-![Car detail](Screenshots/car detail.png)
-![Make Reservation](Screenshots/Reservation Car.png)
-![Confirm reservation](Screenshots/confirm reser.png)
+![Car detail](Screenshots/car_detail.png)
+![Make Reservation](Screenshots/Reservation_Car.png)
+![Confirm reservation](Screenshots/confirm_reser.png)
 ![User Reservation history](Screenshots/Reservation.png)
 
 
