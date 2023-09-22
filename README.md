@@ -107,3 +107,19 @@ To run the test, cd into the directory where manage.py is:
 ```
 python manage.py test
 ```
+
+## SCREENSHOT'S
+
+![Main site](Screenshots/main1.png)
+![Main site](Screenshots/main2.png)
+![Sidebar Admin](Screenshots/Sidebar.png)
+![Sidebar User](Screenshots/SideBarUser.png)
+![Admin Panel](Screenshots/Admin Panel.png)
+![User profile](Screenshots/user_profile.png)
+![Car detail](Screenshots/car detail.png)
+![Make Reservation](Screenshots/Reservation Car.png)
+![Confirm reservation](Screenshots/confirm reser.png)
+![User Reservation history](Screenshots/Reservation.png)
+
+
+
